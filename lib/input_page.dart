@@ -21,33 +21,6 @@ class _InputPageState extends State<InputPage> {
 
   Gender gender;
 
-//  Color male = initialCardColor;
-//  Color female = initialCardColor;
-//
-//  void updateC(Gender gender){
-//    if(gender == Gender.M){
-//      if(male == initialCardColor){
-//        male= finalCardColor;
-//        female = initialCardColor;
-//      }
-//      else{
-//        male=initialCardColor;
-//      }
-//    }
-//
-//   else {
-//      if(female == initialCardColor){
-//        female= finalCardColor;
-//        male = initialCardColor;
-//      }
-//      else{
-//        female=initialCardColor;
-//      }
-//    }
-//
-//
-//  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
