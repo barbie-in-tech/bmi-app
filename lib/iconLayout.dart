@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-
+const kLabelStyle =  TextStyle(fontSize: 20.0);
 class IconContent extends StatelessWidget {
   final IconData gender;
   final String text;

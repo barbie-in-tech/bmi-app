@@ -5,11 +5,12 @@ import 'cardLayout.dart';
 
 const initialCardColor = Color(0xff6d9fb0);
 const finalCardColor = Color(0xffF9A825);
+const kNumStyle = TextStyle(
+  fontSize: 50.0,
+  fontWeight: FontWeight.w800,
+);
 
-enum Gender{
-  M,
-  F
-}
+enum Gender { M, F }
 // we can do thr same for all variables like bottom bar color and so on
 
 class InputPage extends StatefulWidget {
@@ -18,9 +19,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-
   Gender gender;
-
+  int height = 60;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,49 +48,83 @@ class _InputPageState extends State<InputPage> {
               children: <Widget>[
                 Expanded(
                   flex: 1,
-                  child: GestureDetector(
-                    onTap: (){
+                  child: ReusableCard(
+                    c: gender == Gender.M ? finalCardColor : initialCardColor,
+                    myChild: IconContent(FontAwesomeIcons.mars, 'MALE'),
+                    onPressed: () {
                       setState(() {
                         gender = Gender.M;
                       });
-
-
                     },
-                    child: ReusableCard(
-                      gender == Gender.M ? finalCardColor : initialCardColor,
-                      IconContent(FontAwesomeIcons.mars, 'MALE'),
-                    ),
                   ),
                 ),
                 Expanded(
                   flex: 1,
-                  child: GestureDetector(
-                    onTap: (){
+                  child: ReusableCard(
+                    c: gender == Gender.F ? finalCardColor : initialCardColor,
+                    myChild: IconContent(FontAwesomeIcons.venus, 'FEMALE'),
+                    onPressed: () {
                       setState(() {
                         gender = Gender.F;
                       });
-
                     },
-                    child: ReusableCard(
-                      gender == Gender.F ? finalCardColor : initialCardColor,
-                      IconContent(FontAwesomeIcons.venus, 'FEMALE'),
-                    ),
                   ),
                 ),
               ],
             ),
           ),
-          Expanded(child: ReusableCard(initialCardColor, Text('yes'))),
+          Expanded(
+              child: ReusableCard(
+                  c: initialCardColor,
+                  myChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'HEIGHT',
+                        style: kLabelStyle,
+                        textAlign: TextAlign.center,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: <Widget>[
+                          Text(
+                            height.toString(),
+                            style: kNumStyle,
+                          ),
+                          Text(
+                            'in',
+                            style: kLabelStyle,
+                          )
+                        ],
+                      ),
+                      Slider(
+                          value: height.toDouble(),
+                          activeColor: Colors.yellow.shade800,
+                          inactiveColor: Colors.black87,
+                          min: 40,
+                          max: 85,
+                          onChanged: (double newVal) {
+                            setState(() {
+                              height = newVal.round();
+                            });
+                          })
+                    ],
+                  ))),
           Expanded(
             flex: 1,
             child: Row(
               children: <Widget>[
-                Expanded(flex: 1, child: ReusableCard(initialCardColor, Text('Yes'))),
+                Expanded(
+                    flex: 1,
+                    child: ReusableCard(
+                        c: initialCardColor, myChild: Text('Yes'))),
                 Expanded(
                   flex: 1,
                   child: ReusableCard(
-                    initialCardColor,
-                    Text('yes'),
+                    c: initialCardColor,
+                    myChild: Text('yes'),
                   ),
                 ),
               ],
