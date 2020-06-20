@@ -1,12 +1,16 @@
+import 'package:bmi_calculator/results.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'iconLayout.dart';
 import 'cardLayout.dart';
+import 'results.dart';
+import 'bottom.dart';
+import 'function.dart';
 
 const initialCardColor = Color(0xff6d9fb0);
 const finalCardColor = Color(0xffF9A825);
 const kNumStyle = TextStyle(
-  fontSize: 50.0,
+  fontSize: 40.0,
   fontWeight: FontWeight.w800,
 );
 
@@ -159,22 +163,24 @@ class _InputPageState extends State<InputPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Button(
-                                 icon :  FontAwesomeIcons.minus,
-                              press : (){
+                                icon: FontAwesomeIcons.minus,
+                                press: () {
                                   setState(() {
                                     weight--;
                                   });
-                              },
+                                },
                               ),
                               SizedBox(
                                 width: 10.0,
                               ),
-                              Button(icon : FontAwesomeIcons.plus,
-                              press: (){
-                                setState(() {
-                                  weight++;
-                                });
-                              },)
+                              Button(
+                                icon: FontAwesomeIcons.plus,
+                                press: () {
+                                  setState(() {
+                                    weight++;
+                                  });
+                                },
+                              )
                             ],
                           ),
                         ],
@@ -183,47 +189,62 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   flex: 1,
                   child: ReusableCard(
-                    c: initialCardColor,
-                    myChild: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text('AGE', style: kLabelStyle,),
-                        Text(age.toString(), style: kNumStyle,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Button(icon : FontAwesomeIcons.minus,
-                            press: (){
-                              setState(() {
-                                age--;
-                              });
-                            },),
-                            SizedBox(
-                              width: 10.0,
-                            ),
-                            Button(icon : FontAwesomeIcons.plus,
-                            press: (){
-                              setState(() {
-                                age++;
-                              });
-                            },)
-                          ],
-                        ),
-                      ],
-                    )
-                  ),
+                      c: initialCardColor,
+                      myChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'AGE',
+                            style: kLabelStyle,
+                          ),
+                          Text(
+                            age.toString(),
+                            style: kNumStyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Button(
+                                icon: FontAwesomeIcons.minus,
+                                press: () {
+                                  setState(() {
+                                    age--;
+                                  });
+                                },
+                              ),
+                              SizedBox(
+                                width: 10.0,
+                              ),
+                              Button(
+                                icon: FontAwesomeIcons.plus,
+                                press: () {
+                                  setState(() {
+                                    age++;
+                                  });
+                                },
+                              )
+                            ],
+                          ),
+                        ],
+                      )),
                 ),
               ],
             ),
           ),
-          Container(
+          BottomButton(onTap: () {
 
-            height: 80.0,
-            width: double.infinity,
-            margin: EdgeInsets.only(top: 10.0),
-            color: Colors.yellow.shade800,
+            Brain calculation = Brain(h: height, w: weight);
 
-          )
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Results(
+                bmiNum: calculation.calculateBMI(),
+               resText: calculation.getResult(),
+                bmiInterpret: calculation.getInterpretation(),
+              )),
+            );
+          },
+              title: 'CALCULATE',)
         ],
       ),
     );
@@ -233,7 +254,7 @@ class _InputPageState extends State<InputPage> {
 class Button extends StatelessWidget {
   final IconData icon;
   final Function press;
-  Button( {this.icon , this.press});
+  Button({this.icon, this.press});
   @override
   Widget build(BuildContext context) {
     return RawMaterialButton(
@@ -244,11 +265,10 @@ class Button extends StatelessWidget {
         color: Colors.black87,
       ),
       constraints: BoxConstraints.tightFor(
-        width: 56.0,
-        height: 56.0,
+        width: 50.0,
+        height: 50.0,
       ),
-
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(17.0)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(17.0)),
       fillColor: Colors.yellow.shade800,
     );
   }

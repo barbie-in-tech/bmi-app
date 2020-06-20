@@ -18,7 +18,7 @@ class ReusableCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(
                 10.0), // to change the border of top left corner container
           ),
-          height: 250.0,
+          height: 200.0,
           width: double.infinity,
           margin: EdgeInsets.all(15.0),
         ),
