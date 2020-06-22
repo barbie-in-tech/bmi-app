@@ -1,17 +1,20 @@
 import 'package:bmi_calculator/results.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'iconLayout.dart';
-import 'cardLayout.dart';
-import 'results.dart';
-import 'bottom.dart';
-import 'function.dart';
 
-const initialCardColor = Color(0xff6d9fb0);
-const finalCardColor = Color(0xffF9A825);
+import 'bottom.dart';
+import 'cardLayout.dart';
+import 'function.dart';
+import 'iconLayout.dart';
+import 'results.dart';
+
+const initialCardColor = Color(0xffe39271);
+
+const finalCardColor = Color(0xffe88774);
 const kNumStyle = TextStyle(
   fontSize: 40.0,
   fontWeight: FontWeight.w800,
+  color: Color(0xff492540),
 );
 
 enum Gender { M, F }
@@ -42,11 +45,18 @@ class _InputPageState extends State<InputPage> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: <Color>[
-                Color(0xff011d40),
-                Color(0xff09255c),
-                Color(0xff0d2f70),
-                Color(0xff09255c),
-                Color(0xff011d40),
+//                Color(0xff011d40),
+//                Color(0xff09255c),
+//                Color(0xff0d2f70),
+//                Color(0xff09255c),
+//                Color(0xff011d40),
+                Color(0xff492540),
+                Color(0xff4d2743),
+                Color(0xff5c2d4f),
+                Color(0xff693259),
+                Color(0xff5c2d4f),
+                Color(0xff4d2743),
+                Color(0xff492540),
               ])),
         ),
       ),
@@ -54,39 +64,48 @@ class _InputPageState extends State<InputPage> {
         children: <Widget>[
           Expanded(
             flex: 1,
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: ReusableCard(
-                    c: gender == Gender.M ? finalCardColor : initialCardColor,
-                    myChild: IconContent(FontAwesomeIcons.mars, 'MALE'),
-                    onPressed: () {
-                      setState(() {
-                        gender = Gender.M;
-                      });
-                    },
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.2,
+              width: MediaQuery.of(context).size.width * 0.97,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    flex: 1,
+                    child: ReusableCard(
+                      c: gender == Gender.M ? finalCardColor : initialCardColor,
+                      myChild: IconContent(FontAwesomeIcons.mars, 'MALE'),
+                      onPressed: () {
+                        setState(() {
+                          gender = Gender.M;
+                        });
+                      },
+                    ),
                   ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: ReusableCard(
-                    c: gender == Gender.F ? finalCardColor : initialCardColor,
-                    myChild: IconContent(FontAwesomeIcons.venus, 'FEMALE'),
-                    onPressed: () {
-                      setState(() {
-                        gender = Gender.F;
-                      });
-                    },
+                  Expanded(
+                    flex: 1,
+                    child: ReusableCard(
+                      c: gender == Gender.F ? finalCardColor : initialCardColor,
+                      myChild: IconContent(FontAwesomeIcons.venus, 'FEMALE'),
+                      onPressed: () {
+                        setState(() {
+                          gender = Gender.F;
+                        });
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           Expanded(
-              child: ReusableCard(
-                  c: initialCardColor,
-                  myChild: Column(
+              child: Container(
+                  decoration: BoxDecoration(
+                    color: initialCardColor,
+                    borderRadius: BorderRadius.circular(40.0),
+                  ),
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
@@ -111,17 +130,17 @@ class _InputPageState extends State<InputPage> {
                       ),
                       SliderTheme(
                         data: SliderTheme.of(context).copyWith(
-                          thumbColor: Colors.yellow.shade800,
+                          thumbColor: Color(0xff492540),
                           thumbShape:
                               RoundSliderThumbShape(enabledThumbRadius: 15.0),
-                          activeTrackColor: Colors.black87,
+                          activeTrackColor: Color(0xff492540),
                           overlayShape:
                               RoundSliderOverlayShape(overlayRadius: 30.0),
-                          overlayColor: Color(0x30F9A825),
+                          overlayColor: Color(0x30492540),
                         ),
                         child: Slider(
                             value: height.toDouble(),
-                            inactiveColor: Colors.black26,
+                            inactiveColor: Color(0x30492540),
                             min: 40,
                             max: 85,
                             onChanged: (double newVal) {
@@ -134,117 +153,123 @@ class _InputPageState extends State<InputPage> {
                   ))),
           Expanded(
             flex: 1,
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  flex: 1,
-                  child: ReusableCard(
-                      c: initialCardColor,
-                      myChild: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text('WEIGHT', style: kLabelStyle),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.baseline,
-                            textBaseline: TextBaseline.alphabetic,
-                            children: <Widget>[
-                              Text(
-                                weight.toString(),
-                                style: kNumStyle,
-                              ),
-                              Text(
-                                'kg',
-                                style: kLabelStyle,
-                              )
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Button(
-                                icon: FontAwesomeIcons.minus,
-                                press: () {
-                                  setState(() {
-                                    weight--;
-                                  });
-                                },
-                              ),
-                              SizedBox(
-                                width: 10.0,
-                              ),
-                              Button(
-                                icon: FontAwesomeIcons.plus,
-                                press: () {
-                                  setState(() {
-                                    weight++;
-                                  });
-                                },
-                              )
-                            ],
-                          ),
-                        ],
-                      )),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: ReusableCard(
-                      c: initialCardColor,
-                      myChild: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            'AGE',
-                            style: kLabelStyle,
-                          ),
-                          Text(
-                            age.toString(),
-                            style: kNumStyle,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Button(
-                                icon: FontAwesomeIcons.minus,
-                                press: () {
-                                  setState(() {
-                                    age--;
-                                  });
-                                },
-                              ),
-                              SizedBox(
-                                width: 10.0,
-                              ),
-                              Button(
-                                icon: FontAwesomeIcons.plus,
-                                press: () {
-                                  setState(() {
-                                    age++;
-                                  });
-                                },
-                              )
-                            ],
-                          ),
-                        ],
-                      )),
-                ),
-              ],
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.2,
+              width: MediaQuery.of(context).size.width * 0.97,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    flex: 1,
+                    child: ReusableCard(
+                        c: initialCardColor,
+                        myChild: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text('WEIGHT', style: kLabelStyle),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.baseline,
+                              textBaseline: TextBaseline.alphabetic,
+                              children: <Widget>[
+                                Text(
+                                  weight.toString(),
+                                  style: kNumStyle,
+                                ),
+                                Text(
+                                  'kg',
+                                  style: kLabelStyle,
+                                )
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Button(
+                                  icon: FontAwesomeIcons.minus,
+                                  press: () {
+                                    setState(() {
+                                      weight--;
+                                    });
+                                  },
+                                ),
+                                SizedBox(
+                                  width: 10.0,
+                                ),
+                                Button(
+                                  icon: FontAwesomeIcons.plus,
+                                  press: () {
+                                    setState(() {
+                                      weight++;
+                                    });
+                                  },
+                                )
+                              ],
+                            ),
+                          ],
+                        )),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: ReusableCard(
+                        c: initialCardColor,
+                        myChild: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'AGE',
+                              style: kLabelStyle,
+                            ),
+                            Text(
+                              age.toString(),
+                              style: kNumStyle,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Button(
+                                  icon: FontAwesomeIcons.minus,
+                                  press: () {
+                                    setState(() {
+                                      age--;
+                                    });
+                                  },
+                                ),
+                                SizedBox(
+                                  width: 10.0,
+                                ),
+                                Button(
+                                  icon: FontAwesomeIcons.plus,
+                                  press: () {
+                                    setState(() {
+                                      age++;
+                                    });
+                                  },
+                                )
+                              ],
+                            ),
+                          ],
+                        )),
+                  ),
+                ],
+              ),
             ),
           ),
-          BottomButton(onTap: () {
+          BottomButton(
+            onTap: () {
+              Brain calculation = Brain(h: height, w: weight);
 
-            Brain calculation = Brain(h: height, w: weight);
-
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Results(
-                bmiNum: calculation.calculateBMI(),
-               resText: calculation.getResult(),
-                bmiInterpret: calculation.getInterpretation(),
-              )),
-            );
-          },
-              title: 'CALCULATE',)
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Results(
+                          bmiNum: calculation.calculateBMI(),
+                          resText: calculation.getResult(),
+                          bmiInterpret: calculation.getInterpretation(),
+                        )),
+              );
+            },
+            title: 'CALCULATE',
+          )
         ],
       ),
     );
@@ -259,17 +284,16 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return RawMaterialButton(
       onPressed: press,
-      elevation: 6.0,
       child: Icon(
         icon,
-        color: Colors.black87,
+        color: Color(0xff492540),
       ),
       constraints: BoxConstraints.tightFor(
-        width: 50.0,
-        height: 50.0,
+        width: MediaQuery.of(context).size.width * 0.12,
+        height: MediaQuery.of(context).size.height * 0.055,
       ),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(17.0)),
-      fillColor: Colors.yellow.shade800,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+      fillColor: Color(0xffe88774),
     );
   }
 }

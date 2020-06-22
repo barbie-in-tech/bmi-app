@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class BottomButton extends StatelessWidget {
   final Function onTap;
   final String title;
@@ -16,18 +15,18 @@ class BottomButton extends StatelessWidget {
           child: Center(
             child: Text(
               title,
-
               style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+                  color: Color(0xff492540),
                   fontSize: 27.0),
             ),
           ),
         ),
-        height: 80.0,
+        height: MediaQuery.of(context).size.height * 0.09,
         width: double.infinity,
         margin: EdgeInsets.only(top: 10.0),
-        color: Colors.yellow.shade800,
+//        color: Colors.yellow.shade800,
+        color: Color(0xffe88774),
       ),
     );
   }

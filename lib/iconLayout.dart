@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-const kLabelStyle =  TextStyle(fontSize: 20.0);
+const kLabelStyle = TextStyle(fontSize: 20.0, color: Color(0xff492540));
+
 class IconContent extends StatelessWidget {
   final IconData gender;
   final String text;
@@ -8,18 +9,29 @@ class IconContent extends StatelessWidget {
   IconContent(this.gender, this.text);
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Icon(
-          gender,
-          size: 80.0,
-        ),
-        SizedBox(
-          height: 15.0,
-        ),
-        Text(text, style: TextStyle(fontSize: 20.0),)
-      ],
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.1,
+      width: MediaQuery.of(context).size.width * 0.1,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Icon(
+            gender,
+            size: 80.0,
+            color: Color(0xff492540),
+          ),
+          SizedBox(
+            height: 15.0,
+          ),
+          Text(
+            text,
+            style: TextStyle(
+              fontSize: 20.0,
+              color: Color(0xff492540),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

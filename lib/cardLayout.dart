@@ -12,14 +12,14 @@ class ReusableCard extends StatelessWidget {
       onTap: onPressed,
       child: Container(
           child: myChild,
-
+          
           decoration: BoxDecoration(
             color: c,
             borderRadius: BorderRadius.circular(
-                10.0), // to change the border of top left corner container
+                40.0), // to change the border of top left corner container
           ),
-          height: 200.0,
-          width: double.infinity,
+          height: MediaQuery.of(context).size.height*0.2,
+          width: MediaQuery.of(context).size.width*0.4,
           margin: EdgeInsets.all(15.0),
         ),
     );
